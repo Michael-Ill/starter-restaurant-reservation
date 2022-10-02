@@ -4,7 +4,7 @@ const asyncErrorBoundary = require('../errors/asyncErrorBoundary');
 
 //table validator 
 
-async function tableCheck(req, res, next) {
+ function tableCheck(req, res, next) {
     if (!req.body.data) return next({ status: 400, message: "Missing data" });
 
     const { table_name, capacity, reservation_id } = req.body.data;
@@ -36,6 +36,7 @@ async function tableUpdateCheck(req, res, next) {
     }
 
     const reservation = await reservationService.read(reservation_id);
+    console.log(reservation, "---------------------------------------")
 
     if (!reservation) {
         return next({ status: 404, message: `Cannot find ${reservation_id}` });
@@ -86,7 +87,7 @@ async function list(req, res) {
 
 //CRUD
 
-async function read(req, res) {
+ function read(req, res) {
     res.json({ data: res.locals.table });
 }
 
@@ -119,9 +120,9 @@ async function tableClear(req, res, next) {
 }
 
 module.exports = {
-    list: [asyncErrorBoundary(list)],
-    read: [asyncErrorBoundary(tableExists), asyncErrorBoundary(read)],
-    create: [asyncErrorBoundary(tableCheck), asyncErrorBoundary(create)],
+    list: [list],
+    read: [asyncErrorBoundary(tableExists), read],
+    create: [tableCheck, asyncErrorBoundary(create)],
     update: [asyncErrorBoundary(tableUpdateCheck), asyncErrorBoundary(tableCapacityCheck), asyncErrorBoundary(update)],
     tableClear: [asyncErrorBoundary(tableExists), asyncErrorBoundary(tableClear)]
 }

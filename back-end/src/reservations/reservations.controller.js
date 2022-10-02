@@ -77,10 +77,10 @@ async function reservationExistsCheck(req, res, next) {
   }
 
   res.locals.reservation = reservation;
-  next();
+  return next();
 }
 
-//validate Current Status
+//validate New Res Status
 
 async function validateStatus(req, res, next) {
   const currentStatus = res.locals.reservation.status;
@@ -137,17 +137,14 @@ async function reservationStatusUpdater(req, res, next) {
 //reservation updater
 
 async function reservationUpdater(req, res, next) {
-  const { reservation_id } = req.params;
-  if (reservation_id) {
+  const { reservation_id } = res.locals.reservation;
+  console.log("---------------------------------------")
+  // res.json({data: "hello world"})
+  const update = await service.update(reservation_id, req.body.data)
     res.json({
-      data: await service.update(reservation_id, req.body.data),
+      data: update,
     });
-  } else {
-    next({
-      status: 404,
-      message: "reservation_id not found"
-    })
-  }
+   
 }
 
 
@@ -156,22 +153,23 @@ module.exports = {
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(reservationExistsCheck), read],
   create: [
-    asyncErrorBoundary(hasValidProperties),
-    asyncErrorBoundary(peopleCheck),
-    asyncErrorBoundary(checkTimeAndDate),
-    asyncErrorBoundary(reservationStatusCheck),
-    asyncErrorBoundary(create),
+    hasValidProperties,
+    peopleCheck,
+    checkTimeAndDate,
+    reservationStatusCheck,
+    asyncErrorBoundary(create)
   ],
   reservationStatusUpdater: [
-    asyncErrorBoundary(reservationExistsCheck),
+    reservationExistsCheck,
     asyncErrorBoundary(validateStatus),
     asyncErrorBoundary(reservationStatusUpdater)
   ],
   update: [
+    hasValidProperties,
+    peopleCheck,
+    checkTimeAndDate,
     asyncErrorBoundary(reservationExistsCheck),
-    asyncErrorBoundary(hasValidProperties),
-    asyncErrorBoundary(peopleCheck),
-    asyncErrorBoundary(checkTimeAndDate),
-    asyncErrorBoundary(reservationUpdater)
+    // asyncErrorBoundary(reservationUpdater),
+    reservationUpdater
   ]
 };
