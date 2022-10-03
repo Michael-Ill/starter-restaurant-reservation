@@ -36,8 +36,7 @@ async function tableUpdateCheck(req, res, next) {
     }
 
     const reservation = await reservationService.read(reservation_id);
-    console.log(reservation, "---------------------------------------")
-
+    
     if (!reservation) {
         return next({ status: 404, message: `Cannot find ${reservation_id}` });
     }
@@ -61,7 +60,7 @@ async function tableCapacityCheck(req, res, next) {
         return next({ status: 400, message: `The max capacity for ${table.table_name} is ${table.capacity}!` });
     }
     if (table.occupied) {
-        return next({ status: 400, message: `${table.table_name} currently in use` });
+        return next({ status: 400, message: `${table.table_name} occupied` });
     }
     next();
 }
@@ -91,10 +90,15 @@ async function list(req, res) {
     res.json({ data: res.locals.table });
 }
 
-async function create(req, res) {
-    const newTable = await service.create(res.locals.newTable);
-    res.status(201).json({ data: newTable });
-}
+async function create(req, res, next) {
+    const table = req.body.data;
+    const newTable = await service.create(table);
+    
+    table.reservation_id = newTable.reservation_id;
+    table.table_id = newTable.table_id;
+    
+    res.status(201).json({ data: table });
+  }
 
 
 async function update(req, res) {

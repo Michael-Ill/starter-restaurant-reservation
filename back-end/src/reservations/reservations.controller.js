@@ -82,17 +82,17 @@ async function reservationExistsCheck(req, res, next) {
 
 //validate New Res Status
 
-async function validateStatus(req, res, next) {
+function validateStatus(req, res, next) {
   const currentStatus = res.locals.reservation.status;
   const { status } = req.body.data;
-
+  
   if (status === "cancelled") return next();
 
   if (currentStatus === "finished") {
     return next({ status: 400, message: "Cannot update finished reservation." });
   };
 
-  if (status !== "booked" && status !== "seated" && status !== "finished") {
+  if (status !== 'booked' && status !== "seated" && status !== "finished") {
     return next({ status: 400, message: "status unknown!" });
   };
 
@@ -129,17 +129,16 @@ function read(req, res) {
 async function reservationStatusUpdater(req, res, next) {
   const { reservation_id } = req.params;
   const { status } = req.body.data;
-  const reservation = await service.reservationStatusUpdater(reservation_id, status);
+  const reservation = await service.updateStatus(reservation_id, status);
 
-  res.status(200).json({ data: { status: reservation[0] } });
+  res.status(200).json({ data: { status: reservation[0] }});
 };
 
 //reservation updater
 
 async function reservationUpdater(req, res, next) {
   const { reservation_id } = res.locals.reservation;
-  console.log("---------------------------------------")
-  // res.json({data: "hello world"})
+  
   const update = await service.update(reservation_id, req.body.data)
     res.json({
       data: update,
@@ -161,7 +160,7 @@ module.exports = {
   ],
   reservationStatusUpdater: [
     reservationExistsCheck,
-    asyncErrorBoundary(validateStatus),
+    validateStatus,
     asyncErrorBoundary(reservationStatusUpdater)
   ],
   update: [
@@ -169,7 +168,6 @@ module.exports = {
     peopleCheck,
     checkTimeAndDate,
     asyncErrorBoundary(reservationExistsCheck),
-    // asyncErrorBoundary(reservationUpdater),
     reservationUpdater
   ]
 };
