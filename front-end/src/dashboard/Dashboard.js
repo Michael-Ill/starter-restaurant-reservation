@@ -42,12 +42,14 @@ function Dashboard({defaultDate}) {
 
   return (
     <main className="text-center">
-        <h1 className="my-2">Dashboard</h1>
-          <button onClick={() => setDate(previous(date))} className="btn btn-secondary btn-lg">Previous Day</button>
-          <button className="m-3 btn btn-success btn-lg" onClick={() => setDate(today())}>
+        <h1 className="Dashboard">Dashboard</h1>
+          <div className="buttonRow">
+          <button onClick={() => setDate(previous(date))} className="prevDay">Previous Day</button>
+          <button className="today" onClick={() => setDate(today())}>
           Today
         </button>
-        <button onClick={() => setDate(next(date))} className="btn btn-secondary btn-lg">Next Day</button>
+        <button onClick={() => setDate(next(date))} className="nextDay">Next Day</button>
+        </div>
         <br />
         <label className="form-label pb-4">
           <input

@@ -45,9 +45,9 @@ export default function ResCard({ reservation }) {
 
   return (
     <>
-      <div className="card mx-2 border border-secondary rounded-0" style={{ width: "18rem", backgroundColor: "#C7D3DD" }}>
+      <div className="card mx-2 border border-secondary" style={{ width: "18rem", backgroundColor: "#C7D3DD", }}>
         <div className="card-header p-0">
-          <h4>
+          <h4 className="resName">
             {reservation.first_name} {reservation.last_name}
           </h4>
         </div>
@@ -73,20 +73,20 @@ export default function ResCard({ reservation }) {
               <>
                 <Link
                   to={`/reservations/${reservation.reservation_id}/seat`}
-                  className="btn btn-info btn-md"
+                  className="prevDay"
                 >
                   Seat
                 </Link>
                 <button
                   data-reservation-id-cancel={reservation.reservation_id}
-                  className="mx-2 btn btn-danger btn-md"
+                  className="prevDay"
                   onClick={() => handleCancel(reservation.reservation_id)}
                 >
                   Cancel
                 </button>
                 <Link
                   to={`/reservations/${reservation.reservation_id}/edit`}
-                  className="btn btn-success btn-md"
+                  className="nextDay"
                 >
                   Edit
                 </Link>

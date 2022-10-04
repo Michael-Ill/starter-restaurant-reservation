@@ -1,4 +1,111 @@
 .side-bar {
-  background-color: #393a44;
+  background-color: #3e48b8;
   min-width: 200px;
+  border-style: solid;
+}
+
+.prevDay {
+  -webkit-text-size-adjust: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.5;
+  box-sizing: inherit;
+  padding: 0.01em 16px;
+  border-left: 6px solid #ccc!important;
+  color: #000!important;
+  background-color: #ddffff!important;
+  border-color: #2196F3!important;
+  height: 4em;
+  width: 10em;
+  border-radius: 25px;
+}
+
+.nextDay {
+  -webkit-text-size-adjust: 100%;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 1.5;
+  box-sizing: inherit;
+  padding: 0.01em 16px;
+  border-right: 6px solid #ccc!important;
+  color: #000!important;
+  background-color: #ddffff!important;
+  border-color: #2196F3!important;
+  height: 4em;
+  width: 10em;
+  border-radius: 25px;
+}
+
+.today {
+  padding: 2em;
+  font-weight: bold;
+  background-color: dodgerblue;
+  border-radius: 25px;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  justify-content:space-evenly;
+}
+
+.oi {
+  color:#000
+}
+
+.Dashboard {
+ font-size: 50px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color:#000;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.periodic {
+  color:rgb(174, 171, 171);
+  font-weight:700;
+  font-size: 35px;
+  text-shadow: #000;
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+}
+
+html {
+  background-color: rgb(185, 184, 184)
+}
+
+.text-center {
+  background-color: rgb(185, 184, 184)
+}
+
+.background-clip {
+  background-color: rgb(185, 184, 184)
+}
+
+.col {
+  padding: 0;
+}
+
+.div .col {
+  padding: 0;
+}
+
+.sideBarToggle{
+  size: 50%;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.reservation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resName {
+  font-weight: bold;
 }
