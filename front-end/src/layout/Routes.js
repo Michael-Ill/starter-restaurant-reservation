@@ -3,9 +3,10 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import ResForm from "../dashboard/reservations/ResForm";
+import ResEdit from "../dashboard/reservations/ResEdit";
 import TableForm from "../dashboard/tables/TableForm";
 import Seat from "../dashboard/tables/Seat";
+import ResNew from "../dashboard/reservations/ResNew";
 import ResSearch from "../dashboard/reservations/ResSearch"
 //import EditReservation from "../reservations/EditReservation"
 /**
@@ -31,10 +32,10 @@ function Routes() {
         <Seat />
       </Route>
       <Route path="/reservations/:reservation_id/edit">
-        <ResForm />
+        <ResEdit />
       </Route>
       <Route path="/reservations/new">
-        <ResForm />
+        <ResNew />
       </Route>
       <Route path="/search">
         <ResSearch />

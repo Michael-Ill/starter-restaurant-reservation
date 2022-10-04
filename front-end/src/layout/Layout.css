@@ -86,6 +86,7 @@ html {
 
 .col {
   padding: 0;
+  background-color: rgb(185, 184, 184);
 }
 
 .div .col {
@@ -108,4 +109,16 @@ body {
 
 .resName {
   font-weight: bold;
+  background-color: rgb(185, 184, 184);
 }
+
+.newRes {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: rgb(185, 184, 184);
+  border-color: #000;
+}
+
+.newResContainer {
+  background-color: rgb(185, 184, 184);
+}
+

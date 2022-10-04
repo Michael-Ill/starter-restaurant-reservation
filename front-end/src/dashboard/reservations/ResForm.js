@@ -123,8 +123,8 @@ export default function ResForm() {
     };
 
     return (
-        <div>
-            <h3 className="pt-2">New Reservation</h3>
+        <div className="formContainer m-3">
+            {/* <h3 className="pt-2">New Reservation</h3> */}
             {errorMessages()}
             <form onSubmit={handleSubmit}>
                 <div className="form-row">
